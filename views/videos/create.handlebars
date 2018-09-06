@@ -1,0 +1,20 @@
+<div id="videos-container" class="contents-container">
+  <h2>Save a video</h2>
+  <form action="/videos" method="post" >
+    <label for="title">Title</label>
+    <input id="title-input" name="title" maxlength="50"/>
+
+    <label for="videoUrl" >Video URL</label>
+    <input id="videoUrl-input" name="videoUrl"/>
+
+    <label for="description">Description</label>
+    <textarea id="description-input" name="description"></textarea>
+
+    <div>
+      <button id="submit-button" class="input-button" type="submit">
+        <p>Save</p>
+      </button>
+    </div>
+
+  </form>
+</div>
