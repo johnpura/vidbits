@@ -6,7 +6,7 @@ const {connectDatabaseAndDropData, disconnectDatabase} = require('../database-ut
 
 describe('Model: Video', () => {
   beforeEach(connectDatabaseAndDropData);
-  
+
   afterEach(disconnectDatabase);
 
   describe('#title', () => {
@@ -20,6 +20,19 @@ describe('Model: Video', () => {
       const video = new Video({});
       video.validateSync();
       assert.equal(video.errors.title.message, 'Path `title` is required.');
+    });
+    */
+  });
+
+  describe('#videoUrl', () => {
+    it('is a String', () => {
+      const videoUrlAsInt = 1;
+      const video = new Video({videoUrl: videoUrlAsInt});
+      assert.strictEqual(video.videoUrl, videoUrlAsInt.toString());
+    });
+    /*
+    it('is required', () => {
+
     });
     */
   });

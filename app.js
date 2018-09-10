@@ -4,7 +4,7 @@ const expressHandlebars = require('express-handlebars');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-const index = require('./routes/index');
+const videos = require('./routes/videos');
 
 const app = express();
 
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', videos);
 
 app.get('/', function(req, res){
   res.redirect('/videos');

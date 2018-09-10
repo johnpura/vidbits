@@ -1,7 +1,7 @@
 const {assert} = require('chai');
 const {buildVideoObject} = require('../test-utils');
 
-describe('User visits the new video page', () => {
+describe('User visits the create page', () => {
   describe('can fill out and submit the form', () => {
     it('to save a video', () => {
       const newVideo = buildVideoObject();

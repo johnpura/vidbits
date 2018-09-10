@@ -1,15 +1,21 @@
+<!-- Form to save a video -->
 <div id="videos-container" class="contents-container">
   <h2>Save a video</h2>
-  <form action="/videos" method="post" >
+
+  <form method="post" action="/videos">
+
     <label for="title">Title</label>
+    {{#if error}}
+      <div class="error">{{error}}</div>
+    {{/if}}
     <input id="title-input" name="title" maxlength="50"/>
 
     <label for="videoUrl" >Video URL</label>
     <input id="videoUrl-input" name="videoUrl"/>
 
     <label for="description">Description</label>
-    <textarea id="description-input" name="description"></textarea>
-
+    <textarea id="description-input" name="description">{{video.description}}</textarea>
+    <!-- Save button -->
     <div>
       <button id="submit-button" class="input-button" type="submit">
         <p>Save</p>
