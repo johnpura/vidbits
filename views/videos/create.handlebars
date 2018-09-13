@@ -5,13 +5,16 @@
   <form method="post" action="/videos">
 
     <label for="title">Title</label>
-    {{#if error}}
-      <div class="error">{{error}}</div>
-    {{/if}}
-    <input id="title-input" name="title" maxlength="50"/>
+    {{#with video.errors.title as |error|}}
+      <div class="error">{{error.message}}</div>
+    {{/with}}
+    <input id="title-input" name="title" maxlength="50" value="{{video.title}}"/>
 
     <label for="videoUrl" >Video URL</label>
-    <input id="videoUrl-input" name="videoUrl"/>
+    {{#with video.errors.videoUrl as |error|}}
+      <div class="error">{{error.message}}</div>
+    {{/with}}
+    <input id="videoUrl-input" name="videoUrl" value="{{video.videoUrl}}"/>
 
     <label for="description">Description</label>
     <textarea id="description-input" name="description">{{video.description}}</textarea>

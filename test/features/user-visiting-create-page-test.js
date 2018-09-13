@@ -1,16 +1,16 @@
 const {assert} = require('chai');
 const {buildVideoObject} = require('../test-utils');
 
-describe('User visits the create page', () => {
-  describe('can fill out and submit the form', () => {
-    it('to save a video', () => {
+describe('', () => {
+  describe('User visiting the create page', () => {
+    it('can save a video', () => {
       const newVideo = buildVideoObject();
       browser.url('/videos/create');
       browser.setValue('#title-input', newVideo.title);
+      browser.setValue('#videoUrl-input', newVideo.videoUrl);
       browser.setValue('#description-input', newVideo.description);
       browser.click('#submit-button');
       assert.include(browser.getText('body'), newVideo.title);
-      assert.include(browser.getText('body'), newVideo.description);
     });
   });
 });

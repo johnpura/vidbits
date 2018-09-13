@@ -13,19 +13,23 @@ router.get('/videos/create', async (req, res, next) => {
 router.post('/videos', async (req, res, next) => {
   const {title, videoUrl, description} = req.body;
   const video = new Video({title, videoUrl, description});
-  if(!video.title) {
-    res.status(400).render('videos/create', { video:video, error:'Title is required' });
+  video.validateSync();
+  if(video.errors) {
+    res.status(400).render('videos/create', { video:video });
   } else {
-
     await video.save();
-    res.render('videos/show', {video}, function() {
-      res.status(201).send();
-    });
+    res.redirect('/videos/show/' + video._id);
   }
 });
 
 router.get('/videos/:id', async (req, res, next) => {
-  const id = req.params.videoId;
+  const id = req.params.id;
+  const video = await Video.findById(id);
+  res.render('videos/show', {video});
+});
+
+router.get('/videos/show/:id', async (req, res, next) => {
+  const id = req.params.id;
   const video = await Video.findById(id);
   res.render('videos/show', {video});
 });

@@ -12,18 +12,23 @@ describe('Server path: /videos/create', () => {
   afterEach(disconnectDatabase);
 
   describe('POST', () => {
-    it('responds with a 201 status code', async () => {
+    it('responds with a 302 status code', async () => {
       const videoObj = buildVideoObject();
       const response = await request(app)
         .post('/videos')
         .type('form')
         .send(videoObj);
-      assert.equal(response.status , 201);
+      assert.equal(response.status , 302);
     });
-  });
-
-  describe('POST', () => {
-    it('saves a video', async () => {
+    it('redirects to the new Video show page', async () => {
+      const videoObj = buildVideoObject();
+      const response = await request(app)
+        .post('/videos')
+        .type('form')
+        .send(videoObj);
+      assert.include(response.headers.location, '/videos/show');
+    });
+    it('saves a Video', async () => {
       const videoObj = buildVideoObject();
       const newVideo = new Video(videoObj);
       await newVideo.save();
@@ -57,7 +62,7 @@ describe('Server path: /videos/create', () => {
       const allVideos = await Video.find({});
       assert.equal(response.status, 400);
     });
-    it('renders the video form', async () => {
+    it('renders the Video form', async () => {
       const noTitle = {
         videoUrl: 'https://www.youtube.com/embed/XMknFpZu5AQ',
         description: 'See this reporter watch a full solar eclipse'
@@ -69,7 +74,6 @@ describe('Server path: /videos/create', () => {
       const allVideos = await Video.find({});
       assert.include(parseTextFromHTML(response.text, 'form'), 'Title');
     });
-
     it('renders the validation error message', async () => {
       const noTitle = {
         videoUrl: 'https://www.youtube.com/embed/XMknFpZu5AQ',
@@ -80,11 +84,8 @@ describe('Server path: /videos/create', () => {
         .type('form')
         .send(noTitle);
       const allVideos = await Video.find({});
-      assert.include(parseTextFromHTML(response.text, 'form'), 'Title is required');
+      assert.include(parseTextFromHTML(response.text, 'form'), 'a Title is required');
     });
-    //
-    ////TODO: step 24
-    //
     it('preserves the other field values', async () => {
       const noTitle = {
         videoUrl: 'https://www.youtube.com/embed/XMknFpZu5AQ',
@@ -95,7 +96,33 @@ describe('Server path: /videos/create', () => {
         .type('form')
         .send(noTitle);
       const allVideos = await Video.find({});
-      assert.include(parseTextFromHTML(response.text, 'form'), 'Title is required');
+      assert.include(parseTextFromHTML(response.text, 'form'), 'a Title is required');
+    });
+  });
+  describe('when the URL is missing', () => {
+    it('renders the validation error message', async () => {
+      const noUrl = {
+        title: 'Solar Eclipse',
+        description: 'See this reporter watch a full solar eclipse'
+      };
+      const response = await request(app)
+        .post('/videos')
+        .type('form')
+        .send(noUrl);
+      const allVideos = await Video.find({});
+      assert.include(parseTextFromHTML(response.text, 'form'), 'a URL is required');
+    });
+    it('preserves the other field values', async () => {
+      const noUrl = {
+        title: 'Solar Eclipse',
+        description: 'See this reporter watch a full solar eclipse'
+      };
+      const response = await request(app)
+        .post('/videos')
+        .type('form')
+        .send(noUrl);
+      const allVideos = await Video.find({});
+      assert.include(parseTextFromHTML(response.text, 'form'), 'a URL is required');
     });
   });
 });

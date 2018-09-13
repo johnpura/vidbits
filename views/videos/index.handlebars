@@ -2,8 +2,9 @@
 <div id="videos-container" class="contents-container">
   {{#each videos as |video|}}
     <div class="video-card">
+      <iframe class="video-player" width="420" height="315" src="{{video.videoUrl}}" frameborder="0" allowfullscreen></iframe>
       <div class="video-title">
-        {{video.title}}
+        <a href="/videos/show/{{video._id}}">{{video.title}}</a>
       </div>
     </div>
   {{/each}}

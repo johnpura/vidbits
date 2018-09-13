@@ -5,13 +5,13 @@ const app = require('../../app');
 const {seedItemToDatabase, parseTextFromHTML} = require('../test-utils');
 const {connectDatabaseAndDropData, disconnectDatabase} = require('../database-utils');
 
-describe('Server path: /videos/:id', () => {
+describe('', () => {
   beforeEach(connectDatabaseAndDropData);
 
   afterEach(disconnectDatabase);
 
-  describe('GET', () => {
-    it('renders a single video', async () => {
+  describe('GET /videos/:id', () => {
+    it('renders the Video', async () => {
       const video = await seedItemToDatabase();
       const videoId = video._id;
       const response = await request(app)
@@ -19,7 +19,7 @@ describe('Server path: /videos/:id', () => {
         .send(videoId);
       assert.equal(response.status , 200);
       assert.include(parseTextFromHTML(response.text, '#videos-container'), video.title);
-      //assert.include(parseTextFromHTML(response.text, '#video-description'), video.description);
+      //assert.include(browser.getAttribute('iframe', 'src'), videoObj.videoUrl);
     });
   });
 });
