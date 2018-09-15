@@ -2,6 +2,10 @@
   <div class="video-card">
     <div class="video-title">
       <h1>{{video.title}}</h1>
+      <a id="edit" class="add-video-button" href="/videos/{{video._id}}/edit">Edit</a>
+      <form method="post" action="/videos/{{video._id}}/deletions">
+        <input id="delete" class="input-button" type="submit" value="Delete">
+      </form>
     </div>
     <iframe class="video-player" width="420" height="315" src="{{video.videoUrl}}" frameborder="0" allowfullscreen></iframe>
     <div class="video-description">
@@ -9,3 +13,17 @@
     </div>
   </div>
 </div>
+<!--
+<script>
+var confirmDelete = document.getElementById('delete');
+confirmDelete.addEventListener('click', e => {
+  let action = confirm('Are you sure you want to delete the video?');
+  if(!action) {
+    e.preventDefault();
+    return false;
+  } else {
+    return true;
+  }
+});
+</script>
+-->

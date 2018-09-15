@@ -1,8 +1,6 @@
 const {jsdom} = require('jsdom');
-
 const Video = require('../models/video');
 
-// Create and return a sample Video object
 const buildVideoObject = (options = {}) => {
   const title = options.title || 'Train Guy';
   const videoUrl = options.videoUrl || 'https://www.youtube.com/embed/6lutNECOZFw';
@@ -10,13 +8,11 @@ const buildVideoObject = (options = {}) => {
   return {title, videoUrl, description};
 };
 
-// Add a sample Video object to mongodb
-const seedItemToDatabase = async (options = {}) => {
+const seedVideoToDatabase = async (options = {}) => {
   const video = await Video.create(buildVideoObject(options));
   return video;
 };
 
-// extract text from an Element by selector.
 const parseTextFromHTML = (htmlAsString, selector) => {
   const selectedElement = jsdom(htmlAsString).querySelector(selector);
   if (selectedElement !== null) {
@@ -26,8 +22,13 @@ const parseTextFromHTML = (htmlAsString, selector) => {
   }
 };
 
+const queryHTML = (htmlAsString, selector) => {
+  return jsdom(htmlAsString).querySelector(selector);
+};
+
 module.exports = {
   buildVideoObject,
-  seedItemToDatabase,
+  seedVideoToDatabase,
   parseTextFromHTML,
+  queryHTML
 };

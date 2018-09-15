@@ -1,0 +1,29 @@
+<!-- Form to save a video -->
+<div id="videos-container" class="contents-container">
+  <h2>Edit "{{video.title}}"</h2>
+
+  <form method="post" action="/videos/{{video._id}}/updates">
+
+    <label for="title">Title</label>
+    {{#with video.errors.title as |error|}}
+      <div class="error">{{error.message}}</div>
+    {{/with}}
+    <input id="title-input" name="title" maxlength="50" value="{{video.title}}"/>
+
+    <label for="videoUrl" >Video URL</label>
+    {{#with video.errors.videoUrl as |error|}}
+      <div class="error">{{error.message}}</div>
+    {{/with}}
+    <input id="videoUrl-input" name="videoUrl" value="{{video.videoUrl}}"/>
+
+    <label for="description">Description</label>
+    <textarea id="description-input" name="description">{{video.description}}</textarea>
+    <!-- Save button -->
+    <div>
+      <button id="submit-button" class="input-button" type="submit">
+        <p>Save</p>
+      </button>
+    </div>
+
+  </form>
+</div>

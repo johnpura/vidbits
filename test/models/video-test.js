@@ -6,7 +6,6 @@ const {connectDatabaseAndDropData, disconnectDatabase} = require('../database-ut
 
 describe('Model: Video', () => {
   beforeEach(connectDatabaseAndDropData);
-
   afterEach(disconnectDatabase);
 
   describe('#title', () => {
