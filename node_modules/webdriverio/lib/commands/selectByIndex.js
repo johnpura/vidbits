@@ -13,23 +13,9 @@
         <option value="someValue5">seis</option>
     </select>
 
-    :selectByIndexAsync.js
-    client
-        .getValue('#selectbox')
-        .then(function(value) {
-            console.log(value);
-            // returns "someValue0"
-        })
-        .selectByIndex('#selectbox', 4)
-        .getValue('#selectbox')
-        .then(function(value) {
-            console.log(value);
-            // returns "someValue4"
-        });
-
-    :selectByIndexSync.js
+    :selectByIndex.js
     it('should demonstrate the selectByIndex command', function () {
-        var selectBox = browser.element('#selectbox');
+        var selectBox = $('#selectbox');
         console.log(selectBox.getValue()); // returns "someValue0"
 
         selectBox.selectByIndex(4);

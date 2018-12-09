@@ -50,6 +50,7 @@ console.log(browser.options);
         waitforTimeout: 10000,
         waitforInterval: 250,
         coloredLogs: true,
+        deprecationWarnings: true,
         logLevel: 'verbose',
         baseUrl: 'http://localhost',
         connectionRetryTimeout: 90000,
@@ -69,7 +70,7 @@ var client = require('webdriverio').remote({
     	platformName: 'iOS',
         app: 'net.company.SafariLauncher',
         udid: '123123123123abc',
-		deviceName: 'iPhone',
+        deviceName: 'iPhone',
     }
 });
 

@@ -4,7 +4,7 @@
  * element make sure you provide a selector argument. If not just pass `xoffset`
  * and `yoffset` as command arguments.
  *
- * start at a particulat screen location
+ * Start at a particular screen location.
  *
  * @alias browser.swipe
  * @param {String=} selector   element to swipe on
@@ -16,16 +16,9 @@
  *
  */
 
-import { CommandError, RuntimeError } from '../utils/ErrorHandler'
+import { RuntimeError } from '../utils/ErrorHandler'
 
 let swipe = function (selector, xoffset, yoffset, speed) {
-    /*!
-     * mobile check
-     */
-    if (!this.isMobile) {
-        throw new CommandError('swipe command is not supported on non mobile platforms')
-    }
-
     if (arguments.length === 2 && typeof selector === 'number' && typeof xoffset === 'number') {
         /*!
          * you don't care where the swipe starts on the screen

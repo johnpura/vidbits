@@ -6,7 +6,7 @@
  *
  * <example>
     :simpleDragAndDrop.js
-    browser.touchPerform([
+    browser.touchMultiPerform([
         { action: 'press', options: { x: 100, y: 250 }},
         { action: 'moveTo', options: { x: 300, y: 100 }},
         { action: 'release' }
@@ -21,11 +21,9 @@
  *
  */
 
-let touchMultiPerform = function (actions) {
+export default function touchMultiPerform (actions) {
     return this.requestHandler.create({
         path: '/session/:sessionId/touch/multi/perform',
         method: 'POST'
     }, { actions })
 }
-
-export default touchMultiPerform

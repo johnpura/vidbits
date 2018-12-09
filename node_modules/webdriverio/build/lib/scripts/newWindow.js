@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", {
 
 /* global window */
 var newWindow = function newWindow(url) {
-  var windowName = arguments.length <= 1 || arguments[1] === undefined ? 'new window' : arguments[1];
-  var windowFeatures = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+  var windowName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'new window';
+  var windowFeatures = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   window.open(url, windowName, windowFeatures);
 };

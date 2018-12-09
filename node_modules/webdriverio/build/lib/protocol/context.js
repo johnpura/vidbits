@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.default = context;
 /**
  *
  * Retrieve current context or switch to the specified context
@@ -16,13 +17,12 @@ Object.defineProperty(exports, "__esModule", {
  *
  */
 
-var context = function context(id) {
+function context(id) {
+    var data = {};
     var requestOptions = {
         path: '/session/:sessionId/context',
         method: 'GET'
     };
-
-    var data = {};
 
     if (typeof id === 'string') {
         requestOptions.method = 'POST';
@@ -30,7 +30,5 @@ var context = function context(id) {
     }
 
     return this.requestHandler.create(requestOptions, data);
-};
-
-exports.default = context;
+}
 module.exports = exports['default'];

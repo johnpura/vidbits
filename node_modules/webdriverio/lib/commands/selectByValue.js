@@ -13,21 +13,9 @@
         <option value="someValue5">seis</option>
     </select>
 
-    :selectByValueAsync.js
-    client
-        .getValue('#selectbox').then(function(value) {
-            console.log(value);
-            // returns "someValue0"
-        })
-        .selectByValue('#selectbox', 'someValue3')
-        .getValue('#selectbox').then(function(value) {
-            console.log(value);
-            // returns "someValue3"
-        });
-
-    :selectByValueSync.js
+    :selectByValue.js
     it('should demonstrate the selectByValue command', function () {
-        var selectBox = browser.element('#selectbox');
+        var selectBox = $('#selectbox');
         console.log(selectBox.getValue()); // returns "someValue0"
 
         selectBox.selectByValue('someValue3');
